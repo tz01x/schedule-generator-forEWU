@@ -18,8 +18,8 @@ function reducer(state, action) {
       {
         return { ...state, courseData: action.payload }
       }
-    case 'initCourseList':{
-      return {...state,courseList:action.payload}
+    case 'initCourseList': {
+      return { ...state, courseList: action.payload }
     }
 
     default: {
@@ -141,7 +141,7 @@ function App() {
   const [idata, setIdata] = useState({ 'fk': { 'coursecode': 'CSE 301', 'section': ['all'] } });
   const [listofClassRoutting, setlistofClassRoutting] = useState([]);
   const classSchedule = { 'S': [], 'M': [], 'T': [], 'W': [], 'R': [] }
-  const handelChange = (id,name,value) => {
+  const handelChange = (id, name, value) => {
 
     // console.log(event.target.id);
     // console.log(event.target.name);
@@ -166,7 +166,7 @@ function App() {
 
   }
   const addMoreInputfields = () => {
-    if(Object.keys(idata).length>3){
+    if (Object.keys(idata).length > 3) {
       return;
     }
     setIdata({
@@ -176,10 +176,10 @@ function App() {
       }
     })
   }
-  const removeInputField=(key)=>{
-    const temp={...idata}
+  const removeInputField = (key) => {
+    const temp = { ...idata }
     delete temp[key];
-    setIdata({...temp});
+    setIdata({ ...temp });
   }
   const handleAddlistofRouting = (obj) => {
     // console.log(obj);
@@ -209,53 +209,56 @@ function App() {
       return []
     }
   }
-  const doPreOprationWork=()=>{
-    let counter=0;
-    let keys=Object.keys(idata);
+  const doPreOprationWork = () => {
+    let counter = 0;
+    let keys = Object.keys(idata);
     for (const key of keys) {
-     let validlist= dstate.courseList.filter((val,i)=>val.title===idata[key].coursecode);
-      if (validlist.length===1)
-      {counter+=1;}
-      
+      let validlist = dstate.courseList.filter((val, i) => val.title === idata[key].coursecode);
+      if (validlist.length === 1) { counter += 1; }
+
     }
-    return counter===keys.length;
+    return counter === keys.length;
   }
-  const doOparation=()=>{
-    if(!doPreOprationWork()){
+  const doOparation = () => {
+    if (!doPreOprationWork()) {
       return;
     }
     setlistofClassRoutting([]);
     Generator(idata, 0, classSchedule, dstate, handleAddlistofRouting);
   }
-  const showData=()=>{
+  const showData = () => {
     // const tableDataSingleClassSchedule=[{'coursecode':'','section':'','days':[{'day':'','time':''}]}]
-    const gdata=[]
+    const gdata = []
     for (let index = 0; index < listofClassRoutting.length; index++) {
-      const clsScheduleObj=listofClassRoutting[index];
-      const listofweekdays= Object.keys(clsScheduleObj);
-      let m={}
+      const clsScheduleObj = listofClassRoutting[index];
+      const listofweekdays = Object.keys(clsScheduleObj);
+      let m = {}
       for (const iterator of listofweekdays) {
         ///iterator -> sunday, monday, thuesday ...
-        for (const clsDetailsObj of clsScheduleObj[iterator]){
+        for (const clsDetailsObj of clsScheduleObj[iterator]) {
           //M:[{classroutingOBJ},.....]
           //S:[{classroutingOBJ},.....]
           // let v={'coursecode':,'section':'','days':[{'day':'','time':''}]}
-          if(m[clsDetailsObj.coursecode]){
-            m={...m,[clsDetailsObj.coursecode]:{
-              coursecode:clsDetailsObj.coursecode,
-              section:clsDetailsObj.section,
-              schedule:[...m[clsDetailsObj.coursecode].schedule,`${iterator} ${clsDetailsObj.time}`]
-            }}
-          }else{
-            m={...m,[clsDetailsObj.coursecode]:{
-              coursecode:clsDetailsObj.coursecode,
-              section:clsDetailsObj.section,
-              schedule:[`${iterator} ${clsDetailsObj.time}`]
-            }}
+          if (m[clsDetailsObj.coursecode]) {
+            m = {
+              ...m, [clsDetailsObj.coursecode]: {
+                coursecode: clsDetailsObj.coursecode,
+                section: clsDetailsObj.section,
+                schedule: [...m[clsDetailsObj.coursecode].schedule, `${iterator} ${clsDetailsObj.time}`]
+              }
+            }
+          } else {
+            m = {
+              ...m, [clsDetailsObj.coursecode]: {
+                coursecode: clsDetailsObj.coursecode,
+                section: clsDetailsObj.section,
+                schedule: [`${iterator} ${clsDetailsObj.time}`]
+              }
+            }
           }
-          
 
-          
+
+
         }
       }
       gdata.push(m);
@@ -267,10 +270,10 @@ function App() {
 
   useEffect(() => {
     dispatch({ type: 'initCourses', payload: jdata });
-    const clist=[]
-    Object.keys(jdata).map((course,i)=>{
-      Object.keys(jdata[course]).map((code,j)=>{
-          clist.push({title:`${course} ${code}`});
+    const clist = []
+    Object.keys(jdata).map((course, i) => {
+      Object.keys(jdata[course]).map((code, j) => {
+        clist.push({ title: `${course} ${code}` });
       });
     });
     dispatch({ type: 'initCourseList', payload: clist });
@@ -284,36 +287,36 @@ function App() {
       <h1>Schedule Generator </h1>
       <samp className="subtitle">for EWU</samp>
       <div>
-      
-     
+
+
       </div>
-      
-    <div className="input-fields">
-      {Object.keys(idata).map((key, idx) => {
-        return (
-          <div key={idx} className="input-field" >
-            <ComboBox sid={key} sname="coursecode" handelChange={handelChange} clist={dstate.courseList}/>
-            {/* <TextField id={key} name="coursecode" onChange={(event)=>handelChange(key,'coursecode',event.target.value)} value={idata[key].coursecode} label="Course Code" variant="outlined" /> */}
-            {/* <input id= name="coursecode" onChange={handelChange} value={idata[key].coursecode} placeholder="cse 225" /> */}
-            <MultipleSelect sid={key} sname="section" handelChange={handelChange} soptions={renderOption} />
-            {/* <select id={key} name="section" onChange={handelChange}  >
+
+      <div className="input-fields">
+        {Object.keys(idata).map((key, idx) => {
+          return (
+            <div key={idx} className="input-field" >
+              <ComboBox sid={key} sname="coursecode" handelChange={handelChange} clist={dstate.courseList} />
+              {/* <TextField id={key} name="coursecode" onChange={(event)=>handelChange(key,'coursecode',event.target.value)} value={idata[key].coursecode} label="Course Code" variant="outlined" /> */}
+              {/* <input id= name="coursecode" onChange={handelChange} value={idata[key].coursecode} placeholder="cse 225" /> */}
+              <MultipleSelect sid={key} sname="section" handelChange={handelChange} soptions={renderOption} />
+              {/* <select id={key} name="section" onChange={handelChange}  >
               <option value={"all"}>all</option>
               {renderOption(key)}
             </select> */}
-              <IconButton aria-label="delete"  onClick={() => { removeInputField(key)}}>
-              <DeleteIcon />
+              <IconButton aria-label="delete" onClick={() => { removeInputField(key) }}>
+                <DeleteIcon />
               </IconButton>
-            {/* <button onClick={() => { }}>remove</button> */}
+              {/* <button onClick={() => { }}>remove</button> */}
 
-          </div>
-        );
-      })}
+            </div>
+          );
+        })}
       </div>
 
       {/* <button onClick={() => {addMoreInputfields()  }}>add more fields</button> */}
       {/* if inputfield has  more then  4 input*/}
-      {Object.keys(idata).length>3?null:
-      <Button variant="outlined" onClick={() => {addMoreInputfields()  }}>add more fields</Button>
+      {Object.keys(idata).length > 3 ? null :
+        <Button variant="outlined" onClick={() => { addMoreInputfields() }}>add more fields</Button>
       }
       <br></br>
       <br></br>
@@ -321,11 +324,11 @@ function App() {
         setlistofClassRoutting([])
         Generator(idata, 0, classSchedule, dstate, handleAddlistofRouting);
       }}></button> */}
-      <Button variant="contained" size="large" color="primary"  onClick={() => {
+      <Button variant="contained" size="large" color="primary" onClick={() => {
         doOparation();
       }}
-       >
-      Generate
+      >
+        Generate
       </Button>
       {/* <ViewRouteing
        listofClassRoutting={listofClassRoutting}
@@ -374,18 +377,25 @@ function App() {
 
 
         </div> */}
-        {showData().map((value,i)=>{
+        {showData().map((value, i) => {
 
-          return <div className="schedule-table" key={Date.now().toString()+i.toString()}><CustomizedTables key={i} data={value} /></div>;
-          
+          return <div className="schedule-table" key={Date.now().toString() + i.toString()}><CustomizedTables key={i} data={value} /></div>;
+
         })}
-        
+
         {/* <br/>
         
         <CustomizedTables /> */}
 
 
       </Container>
+      <footer>
+        <div>
+          <pre>
+          <a href="https://tumzied.pythonanywhere.com/" style={{color:'black'}}>tz</a> © 2020
+          </pre>
+        </div>
+      </footer>
 
     </div>
   );

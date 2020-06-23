@@ -1,6 +1,6 @@
 body{
  
-  background-image : linear-gradient(-45deg, rgb(152, 152, 204) , rgba(233, 183, 191, 0.486) )  ;
+  background-image : linear-gradient(-45deg, rgb(168, 168, 209) , rgba(233, 183, 191, 0.486) )  ;
   background-attachment: fixed;
   background-size : 500% 100% ;
   animation : gradientAnimation 20s infinite alternate;
@@ -122,3 +122,26 @@ margin: 30px 0;
 }
 
 
+footer {
+  margin-top: 50px;
+  border: 0;
+  /* position:fixed;
+  left:0px;
+  bottom:0px; */
+  height:50px;
+  width:100%;
+  font-size: 15px;
+  color: black;
+  background:rgba(255, 255, 255, 0.034);
+  box-shadow: 0px 0px 7px #00000038;
+  display: flex;
+  flex-direction: column;
+  /* align-content: center; */
+  justify-content: center;
+}
+
+/* IE 6
+* html #footer {
+  position:absolute;
+  top:expression((0-(footer.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop))+'px');
+} */

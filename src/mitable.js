@@ -60,7 +60,7 @@ export default function CustomizedTables(props) {
                 {props.data[key].coursecode}
                   </div>
               </StyledTableCell>
-              <StyledTableCell><div style={{textAlign:"center"}}>{props.data[key].section}</div></StyledTableCell>
+              <StyledTableCell><div >{props.data[key].section}</div></StyledTableCell>
               <StyledTableCell>
 
                 <div className="r-times">
