@@ -1,38 +1,124 @@
+body{
+ 
+  background-image : linear-gradient(-45deg, rgb(152, 152, 204) , rgba(233, 183, 191, 0.486) )  ;
+  background-attachment: fixed;
+  background-size : 500% 100% ;
+  animation : gradientAnimation 20s infinite alternate;
+ }
+ @keyframes gradientAnimation {
+ 0%{
+  background-position : 0%;
+ }
+ 100%{
+  background-position : 100%;
+ }
+ }
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App h1{
+  margin: 50px;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App .subtitle{
+  position: relative;
+  top: -35px;
 }
+.schedule{
+  margin: 35px 0;
+  border: 0 solid;
+  padding: 5px;
+  box-shadow: -1px 1px 7px 1px rgba(68, 65, 65, 0.404);
+  
+}
+.schedule-item{
+display:flex;
+margin-bottom: 3px;
+/* justify-content: center; */
+/* align-items: center; */
+/* border: solid; */
+/* border-width: lrpx tppx ; */
+}
+.schedule .weekday{
+  /* flex-basis: 20px; */
+   width: 100px;
+  font-size: 20px;
+  
+  
+  text-transform: capitalize;
+  padding: 10px;
+  border: 0 solid rgb(31, 139, 211);
+  border-right-width: 2px;
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
+  flex-direction: column;
+}
+.course-details{
+  flex-shrink: 36;
+  display: flex;
+  /* overflow-x: scroll; */
+
+}
+.course-detail-item{
+  padding: 10px;
+  border:  0 solid black;
+  border-right-width: 2px;
+  /* MOBILE */
+  /* FONT-SIZE: 13PX; */
+  /* white-space: nowrap; */
+}
+.course-name{
+  font-weight: 600;
+}
+@media only screen and (max-width: 600px) {
+  .schedule {
+    width: 100%;
+  }
+  .schedule .weekday{
+
+    /* MOBILE */
+    width: 68px;
+    font-size: 14px;
+  }
+  .course-detail-item{
+    FONT-SIZE: 13PX; 
+    white-space: nowrap;
+  }
+  .course-details{
+   
+    overflow-x: scroll;
+  
+  }
+}
+.r-courseC{
+font-weight: 600;
+font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+.r-times{
+  font-size: 16px;
+  text-align: start;
+  
+}
+.r-time{
+  margin: 6px 0px;
+  border-bottom: 1px solid #af9a9a7a;
+  white-space: nowrap;
+}
+.r-tday{
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 600;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.schedule-table{
+margin: 30px 0;
 }
+.input-field{
+  display: flex;
+  justify-content: center;
+  margin: 10px 10px;
+}
+
+
