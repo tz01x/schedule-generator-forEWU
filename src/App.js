@@ -127,8 +127,11 @@ function App() {
     if (!doPreOprationWork()) {
       return;
     }
+    
     setlistofClassRoutting([]);
+    // console.log('[debug] start generating');
     Generator(idata, 0, classSchedule, dstate, handleAddlistofRouting);
+
   }
   const showData = () => {
     //return a list of schedule in below formate
@@ -225,12 +228,15 @@ function App() {
 
       <div className="input-fields">
         {Object.keys(idata).map((key, idx) => {
+          
+          // console.log(idata[key].coursecode);
+          
           return (
             <div key={idx} className="input-field" >
-              <ComboBox sid={key} sname="coursecode" handelChange={handelChange} clist={dstate.courseList} />
+              <ComboBox sid={key} courseCode={idata[key].coursecode} sname="coursecode" handelChange={handelChange} clist={dstate.courseList} />
               {/* <TextField id={key} name="coursecode" onChange={(event)=>handelChange(key,'coursecode',event.target.value)} value={idata[key].coursecode} label="Course Code" variant="outlined" /> */}
               {/* <input id= name="coursecode" onChange={handelChange} value={idata[key].coursecode} placeholder="cse 225" /> */}
-              <MultipleSelect sid={key} sname="section" handelChange={handelChange} soptions={renderOption} />
+              <MultipleSelect sid={key} selectedSections={idata[key].section} sname="section" handelChange={handelChange} soptions={renderOption} />
               {/* <select id={key} name="section" onChange={handelChange}  >
               <option value={"all"}>all</option>
               {renderOption(key)}

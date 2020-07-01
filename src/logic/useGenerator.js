@@ -5,14 +5,21 @@ function strptime(string) {
     const time = string.slice(0, postindex);
     const post = string.slice(postindex, string.length);
   
-    if (post == "AM") {
-      return new Date(`1900-01-01T${time}Z`);
-    }
     let [h, m] = time.split(':');
+
+    //if h=="1" or "2"...."9" then make it "01" or "02"...."09"
+    if(parseInt(h)<10){
+      h=`0${h}`;
+    }
+    if (post === "AM") {
+      return new Date(`1900-01-01T${h}:${m}`);
+    }
+
+    // post PM  
     if (parseInt(h) != 12) {
       h = parseInt(h) + 12;
     }
-    return new Date(`1900-01-01T${h.toString()}:${m}Z`);
+    return new Date(`1900-01-01T${h.toString()}:${m}`);
   
   }
   function covStrToDatetime(time) {
@@ -42,7 +49,7 @@ function isValidSchedule(day, time, classSchedule) {
         counter += 1;
       }
     }
-    if (counter == classSchedule[day].length) {
+    if (counter === classSchedule[day].length) {
       return true;
     }
   
@@ -61,7 +68,7 @@ export default function Generator( inputs, idx, classSchedule, dstate, handleAdd
     return;
   // console.log(values);
   const [course, code] = values[idx].coursecode.split(' ') //CSE 225=> ['CSE' , '225']
-  const listOFsection = values[idx].section[0] == 'all' ? Object.keys(dstate.courseData[course][code]) : [...values[idx].section];
+  const listOFsection = values[idx].section.indexOf('all') !== -1 ? Object.keys(dstate.courseData[course][code]) : [...values[idx].section];
   // for eache section in this  course 
   for (let index = 0; index < listOFsection.length; index++) {
     let validSection = 0;

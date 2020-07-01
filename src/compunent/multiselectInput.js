@@ -64,19 +64,22 @@ function getStyles(name, personName, theme) {
 export default function MultipleSelect(props) {
   const classes = useStyles();
   const theme = useTheme();
-  const [personName, setPersonName] = React.useState([]);
+  const [selectedItem, setSelectedItem] = React.useState([]);
 
   const handleChange = (event) => {
-    setPersonName(event.target.value);
+    // console.log(event.target.value);
+    
+    setSelectedItem(event.target.value);
     props.handelChange(props.sid,props.sname,event.target.value);
 
   };
 
- 
+ //only run this funtion when the parents compunent has change the  state 
   React.useEffect(()=>{
-    console.log('multi-select');
+    // console.log('multi-select');
+    setSelectedItem(props.selectedSections)
     
-  });
+  },[props.selectedSections]);
 
   return (
     <div>
@@ -86,7 +89,7 @@ export default function MultipleSelect(props) {
           labelId="demo-mutiple-name-label"
           id="demo-mutiple-name"
           multiple
-          value={personName}
+          value={selectedItem}
           onChange={handleChange}
           input={<Input />}
           MenuProps={MenuProps}
