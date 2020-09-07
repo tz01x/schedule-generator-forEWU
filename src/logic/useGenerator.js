@@ -28,7 +28,7 @@ function strptime(string) {
     return [strptime(t1), strptime(t2)];
   }
 
-function isValidSchedule(day, time, classSchedule) {
+function isValidSchedule(day, times, classSchedule) {
     //[params expample]  ('S', '10:10AM-11:40AM', OBJECT)
     // console.log(day);
   
@@ -37,23 +37,23 @@ function isValidSchedule(day, time, classSchedule) {
     if (classSchedule[day].length === 0) {
       return true;
     }
-    if (day == null || time == null) {
+    if (day == null || times == null) {
   
       return false;
     }
-    const [newStartTime, newFinishTime] = covStrToDatetime(time);
-    let counter = 0;
-    for (const iterator of classSchedule[day]) {
-      const [clsStartTime, clsFinishTime] = covStrToDatetime(iterator['time']);
-      if ((newStartTime < clsStartTime && newFinishTime < clsFinishTime) || (newStartTime > clsStartTime && clsFinishTime < newStartTime)) {
-        counter += 1;
+    let isvalid=true;
+    for(const time of times){
+      const [newStartTime, newFinishTime] = covStrToDatetime(time);
+      let counter = 0;
+      for (const iterator of classSchedule[day]) {
+        const [clsStartTime, clsFinishTime] = covStrToDatetime(iterator['time']);
+        // if the new starting time less then current starting time  and new finis time is less then current starting time 
+        if (!(newStartTime < clsStartTime && newFinishTime < clsStartTime) || !(clsStartTime<newStartTime && clsFinishTime < newStartTime)) {
+          isvalid = false;
+        }
       }
     }
-    if (counter === classSchedule[day].length) {
-      return true;
-    }
-  
-    return false;
+    return isvalid;
   }
 
 
@@ -80,16 +80,18 @@ export default function Generator( inputs, idx, classSchedule, dstate, handleAdd
       // #for every schedule in a section we chack its valid or not
       // # if its not valid then new loop next section in this course 
 
-      //[argument expample]  (S, 10:10AM-11:40AM, classSchduelOBJ)
+      //[argument expample]  (S, [10:10AM-11:40AM,], classSchduelOBJ)
       if (isValidSchedule(listOFschedule[schduleIdx], dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]], classSchedulecpy)) {
         validSection += 1;
-
-        classSchedulecpy[listOFschedule[schduleIdx]].push({
-          'coursecode': `${course} ${code}`,
-          'section': listOFsection[index],
-          'time': dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]],
-          'room': 'none'
-        });
+        for(const time of dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]]){
+          classSchedulecpy[listOFschedule[schduleIdx]].push({
+            'coursecode': `${course} ${code}`,
+            'section': listOFsection[index],
+            'time': time,
+            'room': 'none'
+          });
+        }
+       
       } else {
         break;
       }

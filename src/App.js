@@ -219,7 +219,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Schedule Generator </h1>
+      <h1>Class Schedule Generator </h1>
       <samp className="subtitle">for EWU</samp>
       <div>
 
@@ -273,9 +273,9 @@ function App() {
       </Container>
       <footer>
         <div>
-          <pre>
-          <a href="https://tumzied.pythonanywhere.com/" style={{color:'black'}}>tz</a> © 2020
-          </pre>
+       
+          <a href="https://tumzied.pythonanywhere.com/" style={{color:'black'}}>Tz</a>
+          
         </div>
       </footer>
 
