@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2080ae373bee308af6229e5776a1795a",
+    "revision": "2a5b910e4354d5fe8e2df7236fa73da0",
     "url": "/schedule-generator-forEWU/index.html"
   },
   {
-    "revision": "784868da9956ea6a272a",
-    "url": "/schedule-generator-forEWU/static/css/main.237d302a.chunk.css"
+    "revision": "91d137c87ce61ebc62f4",
+    "url": "/schedule-generator-forEWU/static/css/main.440a2cd0.chunk.css"
   },
   {
     "revision": "39b460030a70bcb609eb",
@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/schedule-generator-forEWU/static/js/2.44447b88.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "784868da9956ea6a272a",
+    "revision": "91d137c87ce61ebc62f4",
     "url": "/schedule-generator-forEWU/static/js/main.478e907a.chunk.js"
   },
   {
