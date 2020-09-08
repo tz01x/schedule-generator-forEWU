@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/schedule-generator-forEWU/static/css/main.440a2cd0.chunk.css",
-    "main.js": "/schedule-generator-forEWU/static/js/main.478e907a.chunk.js",
-    "main.js.map": "/schedule-generator-forEWU/static/js/main.478e907a.chunk.js.map",
+    "main.js": "/schedule-generator-forEWU/static/js/main.ff94fc90.chunk.js",
+    "main.js.map": "/schedule-generator-forEWU/static/js/main.ff94fc90.chunk.js.map",
     "runtime-main.js": "/schedule-generator-forEWU/static/js/runtime-main.e500950d.js",
     "runtime-main.js.map": "/schedule-generator-forEWU/static/js/runtime-main.e500950d.js.map",
-    "static/js/2.44447b88.chunk.js": "/schedule-generator-forEWU/static/js/2.44447b88.chunk.js",
-    "static/js/2.44447b88.chunk.js.map": "/schedule-generator-forEWU/static/js/2.44447b88.chunk.js.map",
+    "static/js/2.69efff4c.chunk.js": "/schedule-generator-forEWU/static/js/2.69efff4c.chunk.js",
+    "static/js/2.69efff4c.chunk.js.map": "/schedule-generator-forEWU/static/js/2.69efff4c.chunk.js.map",
     "index.html": "/schedule-generator-forEWU/index.html",
-    "precache-manifest.875bbab2787b6a25f45aeb2481e51c3a.js": "/schedule-generator-forEWU/precache-manifest.875bbab2787b6a25f45aeb2481e51c3a.js",
+    "precache-manifest.7149743b66c884ab3da2acaad3d2ab7b.js": "/schedule-generator-forEWU/precache-manifest.7149743b66c884ab3da2acaad3d2ab7b.js",
     "service-worker.js": "/schedule-generator-forEWU/service-worker.js",
     "static/css/main.440a2cd0.chunk.css.map": "/schedule-generator-forEWU/static/css/main.440a2cd0.chunk.css.map",
-    "static/js/2.44447b88.chunk.js.LICENSE.txt": "/schedule-generator-forEWU/static/js/2.44447b88.chunk.js.LICENSE.txt",
+    "static/js/2.69efff4c.chunk.js.LICENSE.txt": "/schedule-generator-forEWU/static/js/2.69efff4c.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/schedule-generator-forEWU/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.e500950d.js",
-    "static/js/2.44447b88.chunk.js",
+    "static/js/2.69efff4c.chunk.js",
     "static/css/main.440a2cd0.chunk.css",
-    "static/js/main.478e907a.chunk.js"
+    "static/js/main.ff94fc90.chunk.js"
   ]
 }
