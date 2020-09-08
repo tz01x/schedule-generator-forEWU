@@ -1,3 +1,5 @@
+import { logDOM } from "@testing-library/react";
+
 function strptime(string) {
     // convart string to datetime object 
     // string formate shoule be "h:mAM/PM"
@@ -33,6 +35,7 @@ function isValidSchedule(day, times, classSchedule) {
     // console.log(day);
   
     // console.log(classSchedule);
+    // console.log(classSchedule[day].length);
   
     if (classSchedule[day].length === 0) {
       return true;
@@ -41,18 +44,22 @@ function isValidSchedule(day, times, classSchedule) {
   
       return false;
     }
-    let isvalid=true;
+    let isvalid=false;
+    let counter = 0;
     for(const time of times){
+      
       const [newStartTime, newFinishTime] = covStrToDatetime(time);
-      let counter = 0;
       for (const iterator of classSchedule[day]) {
         const [clsStartTime, clsFinishTime] = covStrToDatetime(iterator['time']);
         // if the new starting time less then current starting time  and new finis time is less then current starting time 
-        if (!(newStartTime < clsStartTime && newFinishTime < clsStartTime) || !(clsStartTime<newStartTime && clsFinishTime < newStartTime)) {
-          isvalid = false;
+        if ((newFinishTime < clsStartTime) || (newStartTime > clsFinishTime )) {
+          counter++;
         }
       }
     }
+    if(counter==classSchedule[day].length*times.length)
+      isvalid=true;
+
     return isvalid;
   }
 
@@ -81,6 +88,7 @@ export default function Generator( inputs, idx, classSchedule, dstate, handleAdd
       // # if its not valid then new loop next section in this course 
 
       //[argument expample]  (S, [10:10AM-11:40AM,], classSchduelOBJ)
+      // console.log( dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]]);
       if (isValidSchedule(listOFschedule[schduleIdx], dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]], classSchedulecpy)) {
         validSection += 1;
         for(const time of dstate.courseData[course][code][listOFsection[index]][listOFschedule[schduleIdx]]){
