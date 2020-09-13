@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/schedule-generator-forEWU/precache-manifest.7149743b66c884ab3da2acaad3d2ab7b.js"
+  "/schedule-generator-forEWU/precache-manifest.7130145e245c817ead5027ee39b13f7e.js"
 );
 
 self.addEventListener('message', (event) => {
