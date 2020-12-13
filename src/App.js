@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 
 import logo from './logo.svg';
 import './App.css';
-import jdata from './coursedlist.json';
+import jdata from './coursedlist2021.json';
 //material ui
 import Container from '@material-ui/core/Container';
 import TextField from '@material-ui/core/TextField';
@@ -14,8 +14,10 @@ import ViewRouteing from './compunent/viewRouting';
 import CustomizedTables from './compunent/mitable';
 import MultipleSelect from './compunent/multiselectInput';
 import ComboBox from './compunent/autoComplect';
+import CustomizedSnackbars from './compunent/snackbar_alart';
 // logic
 import Generator from './logic/useGenerator';
+
 
 function reducer(state, action) {
   switch (action.type) {
@@ -42,9 +44,12 @@ function App() {
 
   const [dstate, dispatch] = useReducer(reducer, {});
 
-  const [idata, setIdata] = useState({ 'fk': { 'coursecode': 'CSE 301', 'section': ['all'] } });
+  const [idata, setIdata] = useState({ 'fk': { 'coursecode': 'ACT 101', 'section': ['all'] } });
   const [listofClassRoutting, setlistofClassRoutting] = useState([]);
-  const classSchedule = { 'S': [], 'M': [], 'T': [], 'W': [], 'R': [] }
+  const classSchedule = { 'S': [], 'M': [], 'T': [], 'W': [], 'R': [] };
+  const [notification,setNotification]=useState(true);
+  const [notification1,setNotification1]=useState(false);
+  const [finishGenerating,setfinishGenerating]=useState(false);
   const handelChange = (id, name, value) => {
 
     // console.log(event.target.id);
@@ -113,6 +118,12 @@ function App() {
       return []
     }
   }
+  const handelFinishGenerating=()=>{
+      setfinishGenerating(true);
+      if(listofClassRoutting.length==0){
+        setNotification1(true);
+      }
+  };
   const doPreOprationWork = () => {
     let counter = 0;
     let keys = Object.keys(idata);
@@ -130,8 +141,14 @@ function App() {
     
     setlistofClassRoutting([]);
     // console.log('[debug] start generating');
-    Generator(idata, 0, classSchedule, dstate, handleAddlistofRouting);
+    
 
+    ///generat schedule 
+    Generator(idata, 0, classSchedule, dstate, handleAddlistofRouting,handelFinishGenerating);
+    if(finishGenerating){
+     
+    }
+    
   }
   const showData = () => {
     //return a list of schedule in below formate
@@ -212,9 +229,15 @@ function App() {
       });
     });
     dispatch({ type: 'initCourseList', payload: clist });
+    setTimeout(()=>{
+      // if(listofClassRoutting.length==0){
+      //   console.log('no resualt');
+       setNotification(false);
+      // }
+     // console.log(listofClassRoutting.length)
+    },5000);
 
-
-  }, [])
+  }, []);
   
 
   return (
@@ -271,6 +294,8 @@ function App() {
 
         })}
       </Container>
+      <CustomizedSnackbars notification={notification} setNotification={setNotification} severity={"info"} msg={"Schedule updated for The Spring-2021 Class Schedule"}/>
+      <CustomizedSnackbars notification={notification1} setNotification={setNotification1} severity={"warning"} msg={"Cant generate a Schedule for you, Try another combinition"}/>
       <footer>
         <div>
        

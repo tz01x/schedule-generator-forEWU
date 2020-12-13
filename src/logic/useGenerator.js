@@ -65,7 +65,7 @@ function isValidSchedule(day, times, classSchedule) {
 
 
 
-export default function Generator( inputs, idx, classSchedule, dstate, handleAddlistofRouting){
+export default function Generator( inputs, idx, classSchedule, dstate, handleAddlistofRouting,handelFinishGenerating){
     const values = Object.values(inputs);
   // console.log(values);
   // console.log(idx);
@@ -118,6 +118,9 @@ export default function Generator( inputs, idx, classSchedule, dstate, handleAdd
       }
     }
 
+  }
+  if(idx==0){
+    handelFinishGenerating();
   }
   
 }
